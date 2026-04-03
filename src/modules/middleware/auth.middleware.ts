@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import env from "../../config/env";
 
 export interface AuthRequest extends Request {
-  user?: { userId: number; email: string };
+  user?: { userId: string; email: string };
 }
 
 export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -16,7 +16,7 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, env.JWT_SECRET) as { userId: number; email: string };
+    const decoded = jwt.verify(token, env.JWT_SECRET) as { userId: string; email: string };
     req.user = decoded;
     next();
   } catch {

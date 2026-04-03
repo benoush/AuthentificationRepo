@@ -1,21 +1,21 @@
-import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from "sequelize";
+import { Model, InferAttributes, InferCreationAttributes, DataTypes } from "sequelize";
 import { Sequelize } from "sequelize";
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-  declare id: CreationOptional<number>;
+  declare id: string;
   declare email: string;
   declare password: string;
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
+  declare createdAt: Date;
+  declare updatedAt: Date;
 }
 
 export const initModelAuth = (sequelize: Sequelize) => {
   User.init(
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue:DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
       },
       email: {
         type: DataTypes.STRING,

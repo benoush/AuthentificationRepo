@@ -23,7 +23,7 @@ const testConnection = async () => {
   }
 };
 
-const syncDatabase = async (force: boolean = false, alter: boolean = false) => {
+const syncDatabase = async (force: boolean = false, alter: boolean = true) => {
   if (env.NODE_ENV === "production") {
     console.warn(
       "Database synchronization is disabled in production environment.",
@@ -51,22 +51,16 @@ const closeConnection = async () => {
 const initModels = async () => {
 
 initModelArticles(sequelize)
-  // If you have more models, initialize them here and set up associations if needed before syncing the database.
-  Object.values(sequelize.models).forEach((model: any) => {
+
+initModelTodo(sequelize)
+
+initModelAuth(sequelize)
+
+Object.values(sequelize.models).forEach((model: any) => {
     if (typeof model.associate === "function") {
       model.associate(sequelize.models);
     }
-  });
-
-  initModelTodo(sequelize)
-  // If you have more models, initialize them here and set up associations if needed before syncing the database.
-  Object.values(sequelize.models).forEach((model: any) => {
-    if (typeof model.associate === "function") {
-      model.associate(sequelize.models);
-    }
-  });
-
-  initModelAuth(sequelize);
+})
 
 };
 

@@ -12,8 +12,8 @@ export const register = async (req: Request, res: Response) => {
     }
     const result = await authService.register(parsed.data);
     return res.status(201).json({ success: true, data: result });
-  } catch (error: unknown) {
-    return res.status(400).json({ success: false, message: "" });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
   }
 };
 
@@ -25,8 +25,8 @@ export const login = async (req: Request, res: Response) => {
     }
     const result = await authService.login(parsed.data);
     return res.status(200).json({ success: true, data: result });
-  } catch (error: unknown) {
-    return res.status(401).json({ success: false, message: "" });
+  } catch (error) {
+    return res.status(401).json({ success: false, message: error.message });
   }
 };
 
@@ -34,7 +34,7 @@ export const getMe = async (req: AuthRequest, res: Response) => {
   try {
     const result = await authService.getMe(req.user!.userId);
     return res.status(200).json({ success: true, data: result });
-  } catch (error: unknown) {
+  } catch (error) {
     return res.status(404).json({ success: false, message: "" });
   }
 };

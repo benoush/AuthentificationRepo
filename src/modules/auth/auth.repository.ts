@@ -8,7 +8,7 @@ export const createUser = async (email: string, password: string) => {
   return User.create({ email, password });
 };
 
-export const findUserById = async (id: number) => {
+export const findUserById = async (id: string) => {
   return User.findOne({ 
     where: { id },
     attributes: ["id", "email", "createdAt"] // on n'expose jamais le password

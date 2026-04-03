@@ -7,14 +7,14 @@ import { SignOptions } from "jsonwebtoken";
 
 
 
-export const register = async (data: RegisterInput): Promise<{ id: number; email: string }> => {
+export const register = async (data: RegisterInput): Promise<{ id: string; email: string }> => {
   const existing = await findUserByEmail(data.email);
   if (existing) throw new Error("Email déjà utilisé");
 
   const hashedPassword = await bcrypt.hash(data.password, 10);
   const user = await createUser(data.email, hashedPassword);
 
-  return { id: user.id as number, email: user.email };
+  return { id: user.id as string, email: user.email };
 };
 
 export const login = async (data: LoginInput): Promise<{ token: string }> => {
@@ -29,19 +29,19 @@ export const login = async (data: LoginInput): Promise<{ token: string }> => {
   };
 
   const token = jwt.sign(
-    { userId: user.id as number, email: user.email },
+    { userId: user.id as string, email: user.email },
     env.JWT_SECRET,
     signOptions
   );
   return { token };
 };
 
-export const getMe = async (userId: number): Promise<{ id: number; email: string; createdAt: Date }> => {
+export const getMe = async (userId: string): Promise<{ id: string; email: string; createdAt: Date }> => {
   const user = await findUserById(userId);
   if (!user) throw new Error("Utilisateur introuvable");
 
   return { 
-    id: user.id as number, 
+    id: user.id as string, 
     email: user.email, 
     createdAt: user.createdAt as Date 
   };
