@@ -9,10 +9,12 @@ const userController = new UserController();
 
 router.get('', userController.getUserPaginated);
 
-router.get('/id/:id',userController.getUserById);
+router.get('/:id',userController.getUserById);
+
+router.delete('/:id',userController.deleteUser);
 
 router.get('/email/:email',userController.getUserByEmail);
 
-router.delete('/:id',userController.deleteUser)
+
 
 export default router;

@@ -7,9 +7,10 @@ export interface AuthAttributes {
     password: string;
     createdAt?: Date;
     updatedAt?: Date;
+    deleteAt?: Date
 }
 
-export interface AuthCreationAttributes extends Optional<AuthAttributes,"id"|"createdAt"|"updatedAt">{}
+export interface AuthCreationAttributes extends Optional<AuthAttributes,"id"|"createdAt"|"updatedAt"|"deleteAt">{}
 
 
 export class User extends Model<AuthAttributes, AuthCreationAttributes> implements AuthAttributes{
@@ -40,7 +41,7 @@ export const initModelAuth = (sequelize: Sequelize) => {
       },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
-      deletedAt: DataTypes.DATE
+      deleteAt: DataTypes.DATE
     },
     {
       sequelize,

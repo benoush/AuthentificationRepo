@@ -11,23 +11,11 @@ export class UserRepository {
         this.user = User;
     }
 
-    async getUserById(id: string) {
-        // Validation : Si ce n'est pas un UUID, on ne demande même pas à la DB
-        const uuidSchema = z.string().uuid();
-        if (!uuidSchema.safeParse(id).success) {
-            return null; // Ou throw une erreur personnalisée "Invalid ID format"
-        }
-        
+    async getUserById(id: string) {     
         return this.user.findByPk(id);
     }
 
-    async getUserByEmail(email: string) {
-        // Validation basique pour éviter des requêtes inutiles
-        const emailSchema = z.string().email();
-        if (!emailSchema.safeParse(email).success) {
-            return null;
-        }
-
+    async getUserByEmail(email: string) {      
         return this.user.findOne({ where: { email } });
     }
 

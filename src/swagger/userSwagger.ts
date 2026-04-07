@@ -174,6 +174,29 @@ const userPath: OpenAPIV3.PathsObject = {
                 "401": { description: "Missing or invalid token"},
                 "404": { description: "User not found"}
             }
+        },
+        delete:{
+            tags: ["User"],
+            summary: "Delete user by ID",
+            description: "Delete an user by their unique id",
+            parameters: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {type: "string"},
+                    description: "The unique identifier of the user"
+                },
+                
+            ],
+            responses:{
+                "200":{
+                    description:"User delete successfully"
+                },
+                "404": {
+                    description: "Usernot found"
+                }
+            }
         }
         },
 
@@ -214,29 +237,7 @@ const userPath: OpenAPIV3.PathsObject = {
                 "404": { description: "User not found"}
             }
         },
-        delete:{
-            tags: ["User"],
-            summary: "Delete user by ID",
-            description: "Delete an user by their unique id",
-            parameters: [
-                {
-                    name: "id",
-                    in: "path",
-                    required: true,
-                    schema: {type: "string"},
-                    description: "The unique identifier of the user"
-                },
-                
-            ],
-            responses:{
-                "200":{
-                    description:"User delete successfully"
-                },
-                "404": {
-                    description: "Usernot found"
-                }
-            }
-        }
+        
     }
 }
 

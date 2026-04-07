@@ -2,6 +2,7 @@ import { UserService } from "./userService";
 import { Request, Response } from "express";
 import { sendPaginated, sendSuccess } from "../../common/api.response"
 //import { CreateArticleAttribute } from "./user.schema";
+import { z } from "zod";
 
 export class UserController {
     private userService: UserService;
@@ -10,8 +11,12 @@ export class UserController {
         this.userService = new UserService();
     }
 
-getUserById = async (req: Request, res: Response) => {
+    getUserById = async (req: Request, res: Response) => {
         const id = req.params.id as string;
+        const uuidSchema = z.string().uuid();
+        if (!uuidSchema.safeParse(id).success) {
+            return null; 
+        }
         const data = await this.userService.getUserById(id);
         return sendSuccess(
             res,
@@ -23,6 +28,11 @@ getUserById = async (req: Request, res: Response) => {
 
     getUserByEmail = async (req: Request, res: Response) => {
         const email = req.params.email as string;
+        const emailSchema = z.string().email();
+        if (!emailSchema.safeParse(email).success) {
+            return null;
+        }
+
         const data = await this.userService.getUserByEmail(email);
         return sendSuccess(
             res,
