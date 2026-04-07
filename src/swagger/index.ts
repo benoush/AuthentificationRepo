@@ -3,8 +3,7 @@ import { OpenAPIV3 } from "openapi-types";
 import { articlePath, articleSchema, articleTags } from "./article.swagger"
 import { todoPath, todoSchema, todoTags }  from "./todo.swagger";
 import { authPath, authSchema, authTags }  from "./auth.swagger";
-import { userPath, userSchema, userTags } from "./user.swagger";
-
+import { userPath, userSchema, userTags } from "./userSwagger"
 
 
 export const tags: OpenAPIV3.TagObject[] = [

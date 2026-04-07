@@ -7,8 +7,7 @@ import {notFoundHandler,errorHandler} from "modules/middleware/error.middleware"
 import articleroute from "./modules/article/article.route"
 import todoroute from "./modules/todo/todo.route";
 import authRoutes from "./modules/auth/auth.route";
-//import userRoutes from "./modules/user/user.route";
-
+import  userRoute from "./modules/user/userRoute";
 
 
 
@@ -55,7 +54,9 @@ app.get(`${API_PREFIX}/health`, (req: Request, res: Response) => {
 app.use(`${API_PREFIX}/article`, articleroute)
 app.use(`${API_PREFIX}/todo`, todoroute)
 app.use(`${env.API_PREFIX}/auth`, authRoutes);
-//app.use(`${API_PREFIX}/users`, userRoutes);
+app.use(`${API_PREFIX}/user`, userRoute)
+
+
 
 
 // 404 handler
