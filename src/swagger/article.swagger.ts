@@ -61,6 +61,7 @@ const articlePath: OpenAPIV3.PathsObject = {
         post:{
             tags: ["Article"],
             summary: "Create an article",
+            security:[{bearerAuth:[]}],
             description: "Create a new article",
             requestBody: {
                 required: true,

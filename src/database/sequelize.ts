@@ -21,6 +21,7 @@ const testConnection = async () => {
     console.error("Unable to connect to the database:", error);
     return false;
   }
+
 };
 
 const syncDatabase = async (force: boolean = false, alter: boolean = true) => {

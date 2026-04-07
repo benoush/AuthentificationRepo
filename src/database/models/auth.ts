@@ -1,7 +1,18 @@
-import { Model, InferAttributes, InferCreationAttributes, DataTypes } from "sequelize";
+import { Model, Optional, DataTypes } from "sequelize";
 import { Sequelize } from "sequelize";
 
-export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+export interface AuthAttributes {
+    id: string;
+    email: string;
+    password: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+export interface AuthCreationAttributes extends Optional<AuthAttributes,"id"|"createdAt"|"updatedAt">{}
+
+
+export class User extends Model<AuthAttributes, AuthCreationAttributes> implements AuthAttributes{
   declare id: string;
   declare email: string;
   declare password: string;
