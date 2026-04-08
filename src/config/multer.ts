@@ -17,7 +17,7 @@ const createStorage = (folder:string) => {
 };
 
 const fileFilter = (req, file: Express.Multer.File, cb: multer.FileFilterCallback)=>{
-    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    const allowed = ["image/jpeg", "image/png", "image/webp", "image/svg"];
     if (allowed.includes(file.mimetype)){
         cb(null, true);
     } else{

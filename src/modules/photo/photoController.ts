@@ -2,6 +2,7 @@ import { Response } from "express";
 import  { PhotoService } from "./photoService";
 import { AuthRequest } from "../middleware/auth.middleware";
 import { sendPaginated, sendSuccess } from "../../common/api.response"
+import { success } from "zod";
 
 
 export class PhotoController{
@@ -18,9 +19,12 @@ export class PhotoController{
     };
 
     addGalleryPhoto = async (req:AuthRequest, res: Response) =>{
-        const file = req.file;
-        const data = await this.photoService.addToGallery(req.user!.userId, file!.path);
-        return sendSuccess(res, data,"Photo ajoutée à la gallery", 201);
+        const files = req.files as Express.Multer.File[];
+        if(!files || files.length ===0){
+            return res.status(400).json({ success: false, message: "Aucun fichier envoyé"});
+        }
+        const data = await this.photoService.addToGallery(req.user!.userId, files);
+        return sendSuccess(res, data,"Photos ajoutées à la gallery", 201);
     }
 
     getGallery = async (req:AuthRequest, res: Response) =>{

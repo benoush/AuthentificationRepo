@@ -8,7 +8,7 @@ const photoController = new PhotoController();
 
 router.use(authMiddleware);
 
-router.post("/gallery", uploadGallery.single("photo"), photoController.addGalleryPhoto);
+router.post("/gallery", uploadGallery.array("photos",10), photoController.addGalleryPhoto);
 router.get ("/gallery", photoController.getGallery);
 router.patch("/profile/photo", uploadAvatar.single("avatar"), photoController.uploadAvatar);
 

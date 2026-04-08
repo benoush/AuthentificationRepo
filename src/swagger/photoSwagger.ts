@@ -71,13 +71,17 @@ const photoPath: OpenAPIV3.PathsObject = {
             schema: {
               type: "object",
               properties: {
-                photo: { type: "string", format: "binary" },
-              },
-              required: ["photo"],
-            },
+                photos: {
+                    type:"array",
+                    items:{ type: "string", format: "binary" },
+                    maxItems: 10
+                },
+             },
+             required: ["photos"],
           },
         },
       },
+    },
       responses: {
         "201": {
           description: "Photo ajoutée",
@@ -140,6 +144,7 @@ const photoPath: OpenAPIV3.PathsObject = {
       },
     },
   },
-};
+}
+
 
 export { photoTags, photoSchema,photoPath };
