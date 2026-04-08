@@ -8,6 +8,8 @@ import articleroute from "./modules/article/article.route"
 import todoroute from "./modules/todo/todo.route";
 import authRoutes from "./modules/auth/auth.route";
 import  userRoute from "./modules/user/userRoute";
+import photoRoute from "./modules/photo/photoRoute";
+import path from "node:path";
 
 
 
@@ -54,7 +56,10 @@ app.get(`${API_PREFIX}/health`, (req: Request, res: Response) => {
 app.use(`${API_PREFIX}/article`, articleroute)
 app.use(`${API_PREFIX}/todo`, todoroute)
 app.use(`${env.API_PREFIX}/auth`, authRoutes);
-app.use(`${API_PREFIX}/user`, userRoute)
+app.use(`${API_PREFIX}/user`, userRoute);
+app.use(`${API_PREFIX}/user`, photoRoute);
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+
 
 
 

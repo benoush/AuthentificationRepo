@@ -6,8 +6,9 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   declare email: string;
   declare password: string;
   declare createdAt: Date;
-  declare updatedAt: Date;
-  declare deletedAt:  Date;
+  declare updatedAt?: Date;
+  declare deletedAt?:  Date;
+  declare avatar?: string 
 }
 
 export const initModelAuth = (sequelize: Sequelize) => {
@@ -15,7 +16,7 @@ export const initModelAuth = (sequelize: Sequelize) => {
     {
       id: {
         type: DataTypes.UUID,
-        defaultValue:DataTypes.UUIDV4,
+        defaultValue:DataTypes.UUID,
         primaryKey: true,
       },
       email: {
@@ -29,7 +30,12 @@ export const initModelAuth = (sequelize: Sequelize) => {
       },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
-      deletedAt: DataTypes.DATE
+      deletedAt: DataTypes.DATE,
+      avatar: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+      }
     },
     {
       sequelize,

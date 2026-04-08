@@ -3,14 +3,17 @@ import { OpenAPIV3 } from "openapi-types";
 import { articlePath, articleSchema, articleTags } from "./article.swagger"
 import { todoPath, todoSchema, todoTags }  from "./todo.swagger";
 import { authPath, authSchema, authTags }  from "./auth.swagger";
-import { userPath, userSchema, userTags } from "./userSwagger"
+import { userPath, userSchema, userTags } from "./userSwagger";
+import { photoPath, photoSchema, photoTags } from "./photoSwagger";
+
 
 
 export const tags: OpenAPIV3.TagObject[] = [
     articleTags,
     todoTags,
     authTags,
-    userTags
+    userTags,
+    photoTags
 ];
 
 export const paths: OpenAPIV3.PathsObject = {
@@ -44,14 +47,16 @@ export const paths: OpenAPIV3.PathsObject = {
     ...articlePath,
     ...todoPath,
     ...authPath,
-    ...userPath
+    ...userPath,
+    ...photoPath
 };
 
 export const schemas: OpenAPIV3.ComponentsObject['schemas'] = {
     ...articleSchema,
     ...todoSchema,
     ...authSchema,
-    ...userSchema
+    ...userSchema,
+    ...photoSchema
 
 };
 

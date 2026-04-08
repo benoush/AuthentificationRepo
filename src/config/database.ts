@@ -17,4 +17,5 @@ const options: Options = {
     dialect: "postgres",
 };
 
+
 export default options;

@@ -4,7 +4,7 @@ import env from "../config/env";
 import { initModelArticles } from "./models/article";
 import {initModelTodo} from "./models/todo";
 import { initModelAuth } from "./models/auth";
-
+import { initModelPhoto} from "./models/photo"
 
 
 const sequelize = new Sequelize({
@@ -55,6 +55,8 @@ initModelArticles(sequelize)
 initModelTodo(sequelize)
 
 initModelAuth(sequelize)
+
+initModelPhoto(sequelize)
 
 Object.values(sequelize.models).forEach((model: any) => {
     if (typeof model.associate === "function") {
